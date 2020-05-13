@@ -147,6 +147,7 @@ export default class Dropdown extends PureComponent {
     renderAccessory: PropTypes.func,
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
+    contentStyle: (ViewPropTypes || View.propTypes).style,
     overlayStyle: (ViewPropTypes || View.propTypes).style,
     pickerStyle: (ViewPropTypes || View.propTypes).style,
 
@@ -507,7 +508,7 @@ export default class Dropdown extends PureComponent {
       <TextField
         label=''
         labelHeight={dropdownOffset.top - Platform.select({ ios: 1, android: 2 })}
-
+        lineWidth={0}
         {...props}
 
         value={title}
@@ -642,6 +643,7 @@ export default class Dropdown extends PureComponent {
       renderBase,
       renderAccessory,
       containerStyle,
+      contentStyle,
       overlayStyle: overlayStyleOverrides,
       pickerStyle: pickerStyleOverrides,
 
@@ -727,7 +729,7 @@ export default class Dropdown extends PureComponent {
     return (
       <View onLayout={this.onLayout} ref={this.updateContainerRef} style={containerStyle}>
         <TouchableWithoutFeedback {...touchableProps}>
-          <View pointerEvents='box-only'>
+          <View pointerEvents='box-only' style={contentStyle}>
             {this.renderBase(props)}
             {this.renderRipple()}
           </View>
